@@ -1,0 +1,7 @@
+(load "filter.scm")
+(define (map p seq)
+	(acc (lambda (x y)  (cons (p x)  y) ) '() seq))
+(define (append seq1 seq2)
+	(acc cons seq2 seq1))
+(define (length seq)
+	(acc (lambda (x y )(+ 1 y))  0   seq))
