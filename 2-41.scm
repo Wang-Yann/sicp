@@ -1,0 +1,15 @@
+
+(load "filter.scm")
+(define (flatmap proc seq)
+        (acc append '() (map proc seq)))
+(define (unique-pairs n)
+        (flatmap (lambda (i)  (map (lambda (j) (list i j))(enumerate-interval 1 (- i 1))))
+                                        (enumerate-interval 1 n)))
+
+(define (enum-3nums n)
+        (flatmap (lambda (i) 
+	 (map (lambda (j) (cons i j)) (unique-pairs (- i 1))))
+         (enumerate-interval 1 n)))
+(define (n-sum-pairs n)
+	(define(n-sum1? pair ) (= n (+ (car pair) (cadr pair) (caddr pair))))
+	(filter  n-sum1? (enum-3nums n)))
