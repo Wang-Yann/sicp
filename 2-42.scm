@@ -10,7 +10,7 @@
 		    (enumerate-interval 1 board-size)))
 		  (queen-cols (- k 1))))))
 	(queen-cols board-size))
-(define (flatmap proc seq) (acc cons '() (map proc seq)))
+(define (flatmap proc seq) (acc append '() (map proc seq)))
 (define emptyboard '() )
 (define (adjoin-position new-row k rest-of-queens)
 	  (cons new-row rest-of-queens ))
