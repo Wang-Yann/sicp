@@ -1,0 +1,15 @@
+(define (acc-n op init seqs)
+	(if (null? (car seqs))  '() 
+<<<<<<< HEAD
+		(cons (acc op init  (map (lambda (subtree) ()) (car seqs)  )
+			(acc-n op init  (cdr seqs) ))))
+
+(load "filter.scm")
+
+=======
+		(cons (acc op init  (map car seqs)  )
+			(acc-n op init (map cdr seqs )))))
+
+(load "filter.scm")
+(load "smplst.scm")
+>>>>>>> 76e8fa072041ae1ae87ee8fe07b09c3b89fc924c
