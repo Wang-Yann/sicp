@@ -20,4 +20,4 @@
        (else (list '* x y2))))
   (cons '* (cons x y))))
 (define (multiplicand x) 
-	(let ((tail-op (cddr x))) (if(single-op? tail-op)(car tail-op) (apply make-product tail-op))))
+  (let ((tail-op (cddr x))) (if(single-op? tail-op)(car tail-op) (apply make-product tail-op))))
