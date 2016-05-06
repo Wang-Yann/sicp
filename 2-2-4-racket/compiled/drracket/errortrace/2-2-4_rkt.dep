@@ -1,0 +1,1 @@
+("6.5" ("248a29deed499414196b49e1f061c8c612c4bbf7" . "db04cb5f09d419479ba3ad25dce9989ad294d81e") #"C:\\Users\\Administrator\\AppData\\Roaming\\Racket\\planet\\300\\6.5\\cache\\soegaard\\sicp.plt\\2\\1\\sicp.rkt" #"C:\\Users\\sicp\\2-2-4-racket\\2-44.rkt" (collects #"errortrace" #"errortrace-key.rkt") (collects #"racket" #"main.rkt") (collects #"racket" #"runtime-config.rkt"))
