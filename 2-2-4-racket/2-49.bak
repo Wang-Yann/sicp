@@ -1,0 +1,38 @@
+#lang racket
+(require (planet "sicp.ss" ("soegaard" "sicp.plt" 2 1)))
+;(define (frame-paiter frame)
+(define s (list
+    (make-segment
+      (make-vect 0.1 0.4)
+      (make-vect 0.3 0.4))
+    (make-segment
+      (make-vect 0.5 0.4)
+      (make-vect 0.7 0.4))
+    (make-segment
+      (make-vect 0.3 0.6)
+      (make-vect 0.5 0.6))
+    (make-segment
+      (make-vect 0.8 0.3)
+      (make-vect 0.8 0.55))
+    (make-segment
+      (make-vect 0.78 0.6)
+      (make-vect 0.80 0.6))
+    (make-segment
+      (make-vect 0.9 0.3)
+      (make-vect 0.9 0.55))
+    (make-segment
+      (make-vect 0.88 0.6)
+      (make-vect 0.90 0.6))))
+(define myFrame
+  (make-frame
+    (make-vect 0 0)
+    (make-vect 200 0)
+    (make-vect 0 200)))
+
+(define oe (make-vect 0 0))
+(define e1 (make-vect 0 1))
+(define e2 (make-vect 1 0))
+;(define a-frame (make-frame oe e1 e2))
+;((frame-coord-map a-frame) (make-vect 6 0))
+
+ ((segments->painter s) myFrame)

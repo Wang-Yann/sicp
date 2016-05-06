@@ -1,0 +1,19 @@
+#lang racket
+(require 2-44.tkt)
+(require (planet "sicp.ss" ("soegaard" "sicp.plt" 2 1)))
+ (define wave2 (beside einstein (flip-vert einstein)))
+(define e einstein)
+(define wave4 (below wave2 wave2))
+;(paint wave4)
+(define (flipped-pairs p)
+  (let((p2 (beside p (flip-vert p))))
+    (below p2 p2)))
+;(paint (flipped-pairs einstein))
+
+(define (right-split p n)
+  (if (= n 0) p (let ((smaller (right-split p (- n 1)))) (beside p (below smaller smaller)))))
+(define (corner-split p n)
+   (if(= n 0) p
+      (let ((up (up-split p (- n 1))) (right (right-split p (- n 1))))
+        (let ((top-left (beside up up)) (bottom-right(below right right)) (corner (corner-split p (- n 1))))
+          (beside (below p top-left) (below bottom-right corner))))))
