@@ -1,7 +1,0 @@
-(load "prmpnt.scm")
-(define (load-painter file-name)
-  (picture->painter
-       (string-append  file-name ".pgm")))
-(define fovnder (load-painter "fovnder"))
-
-
