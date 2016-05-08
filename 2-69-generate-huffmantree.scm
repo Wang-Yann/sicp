@@ -1,0 +1,8 @@
+(load "huffman-tree-code")
+(define (generate-huffman-tree pairs )
+	(successive-merge (make-leaf-set pairs)))
+(define (successive-merge leaf-set)
+	(cond ((= (length leaf-set) 0) '())
+		  ((= (length leaf-set) 1)(car leaf-set))
+		(else	(let ((first (car leaf-set)) (next (cadr leaf-set))(remain (cddr leaf-set)) )
+		(successive-merge (adjoin-set  (make-code-tree first next) remain ))))))

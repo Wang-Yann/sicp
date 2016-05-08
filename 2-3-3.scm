@@ -1,0 +1,11 @@
+(define ( element-of-set? x set)
+	(cond ( (null? set) #f)
+		((equal? x (car set)) #t)
+		(else (element-of-set? x (cdr  set)))))
+(define (adjoin x set)
+	(if (element-of-set? x set) set (cons x set)))
+(define (intersection-set x y)
+	(cond ((or (null? x) (null? y)) '() )
+		((element-of-set? (car x) y) (cons (car x) (intersection-set (cdr x) y)))
+		(else (intersection-set (cdr x ) y)))) 
+	 
