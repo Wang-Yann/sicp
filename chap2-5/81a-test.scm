@@ -1,0 +1,5 @@
+(load "81scheme-number-package.scm")
+(load "81apply-generic.scm")
+(install-scheme-number-package)
+(load "81louis-coercion.scm")
+;(apply-generic 'exp (make-scheme-number 11) (make-scheme-number 2))

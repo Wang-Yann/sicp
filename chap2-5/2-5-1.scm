@@ -21,7 +21,7 @@
   (put 'equ? '(scheme-number scheme-number)
 	   (lambda (x y) (= x y)))
   (put '=zero? '(scheme-number) (lambda(x) (= x 0)))
-  'done)
+    'done)
 (define (make-scheme-number n)
   ((get 'make 'scheme-number) n))
 
