@@ -21,6 +21,7 @@
   (put 'raise '(scheme-number)  
             (lambda (x) (make-complex-from-real-imag x 0))) ;2-84++
   ;(put 'exp '(scheme-number scheme-number) (lambda (x y) (tag (expt x y))))
+   (put '=zero? '(scheme-number) (lambda(x) (= x 0)))
   'done)
 (define (make-scheme-number n)
   ((get 'make 'scheme-number) n))
