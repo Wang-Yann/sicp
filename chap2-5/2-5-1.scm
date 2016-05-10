@@ -1,4 +1,4 @@
-(load "put-get.scm")
+(load "2-5-1-put-get.scm")
 
 (define (add x y) (apply-generic 'add x y))
 (define (sub x y) (apply-generic 'sub x y))
