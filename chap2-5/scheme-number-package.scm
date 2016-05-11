@@ -23,6 +23,8 @@
   (put 'negate '(scheme-number)   (lambda (n) (tag (- n)))) 
   ;(put 'exp '(scheme-number scheme-number) (lambda (x y) (tag (expt x y))))
    (put '=zero? '(scheme-number) (lambda(x) (= x 0)))
+  (put 'greatest-common-divisor '(scheme-number scheme-number) 
+      (lambda (a b) (gcd a b)))     ;2-94+++++++
   'done)
 (define (make-scheme-number n)
   ((get 'make 'scheme-number) n))

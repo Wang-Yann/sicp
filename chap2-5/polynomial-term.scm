@@ -56,4 +56,25 @@
                    (list (adjoin-term (make-term new-o new-c) 
                                       (car rest-of-result)) 
                          (cadr rest-of-result)))))))) 
-
+ (define (remainder-terms p1 p2) ;;;;;;;;2-94++++++++++
+   (cadr (div-terms p1 p2))) 
+  
+ (define (gcd-terms a b) 
+   (if (empty-termlist? b) 
+     a 
+     (gcd-terms b (remainder-terms a b)))) 
+  
+;(define (pseudoremainder-terms a b)                ;;;2-96+++++++ !!!!FAILED!!!!!!!!
+ ;  (let* ((o1 (order (first-term a))) 
+  ;        (o2 (order (first-term b))) 
+   ;       (c (coeff (first-term b))) 
+    ;      (divident (mul-terms (make-term 0  
+     ;                                     (expt c (+ 1 (- o1 o2)))) 
+      ;                         a))) 
+    ; (cadr (div-terms divident b)))) 
+; (define (gcd-terms a b)                            ;;;;2-96+++++
+ ;  (if (empty-termlist? b) 
+  ;   (let* ((coeff-list (map cadr a)) 
+   ;         (gcd-coeff (apply gcd coeff-list))) 
+    ;   (div-terms a (make-term 0  gcd-coeff))) 
+    ; (gcd-terms b (pseudoremainder-terms a b))))

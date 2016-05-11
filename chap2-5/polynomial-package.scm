@@ -21,6 +21,12 @@
      		(make-poly (variable poly1)	(div-terms (term-list poly1) 
                   (term-list poly2))) 
      	(error "not the same variable" (list poly1 poly2)))) 	;2-91++++
+    (define (gcd-poly p1 p2) ;;;;;;;;;;;;2-94++++++++++++++
+       (if (same-variable? (variable p1) (variable p2)) 
+         (make-poly (variable p1) 
+                (gcd-terms (term-list p1) 
+                           (term-list p2))) 
+         (error "not the same variable -- GCD-POLY" (list p1 p2)))) 
 	;;interface to rest of the system
 	(define (tag x) (attach-tag 'polynomial x))
 	(define (zero-poly? poly)(empty-termlist? (term-list poly))) 
@@ -35,7 +41,11 @@
 	 (put 'div '(polynomial polynomial) (lambda (x y) 
 			(tag (div-poly x y))))
 	 (put 'make 'polynomial (lambda(var terms) (tag (make-poly var terms))))
+	 (put 'greatest-common-divisor '(polynomial polynomial) 
+      (lambda (a b) (tag (gcd-poly a b))))    ;;;;2-94++++++ 
+
 'done)	
+
 
 (define (make-polynomial var terms) 	
 	((get 'make 'polynomial) var terms))

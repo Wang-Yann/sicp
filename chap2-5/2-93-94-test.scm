@@ -1,0 +1,22 @@
+(load "raw-apply-generic-2.scm")
+(load "polynomial-package.scm")
+(install-polynomial-package)
+(load "coercion-package.scm")
+(install-coercion-package)
+
+(define (negate x) (apply-generic 'negate x))
+(define (add x y) (apply-generic 'add x y))
+(define (sub x y) (apply-generic 'sub x y))
+(define (mul x y) (apply-generic 'mul x y))
+(define (div x y) (apply-generic 'div x y))
+(define (=zero? x) (apply-generic '=zero? x )) 
+ (define (greatest-common-divisor a b) 
+   (apply-generic 'greatest-common-divisor a b)) ;;2-93+++
+
+(define A (make-polynomial 'x (list (list 10 20) (list 3 2) (list 2 1))))
+(define B (make-polynomial 'x '((9 2) (4 1) (0 6))))
+(define C (make-polynomial 'x '((9 3) (4 3) (0 4))))
+(define p1 (make-polynomial 'x '((4 1) (3 -1) (2 -2) (1 2))))
+(define p2 (make-polynomial 'x '((3 1) (1 -1))))
+(define g-c-d (greatest-common-divisor p1 p2))
+(define g-c-d2 (greatest-common-divisor B C))
