@@ -1,5 +1,5 @@
 (load "put+get.scm")
-(load "attach-tag.scm")
+(load "attach-tag-2.scm")
 (define (install-rectangular-package)
   ;; internal procedures
   (define (real-part z) (car z))
@@ -85,6 +85,9 @@
        (lambda (x y) (tag (make-from-real-imag x y))))
   (put 'make-from-mag-ang 'complex
        (lambda (r a) (tag (make-from-mag-ang r a))))
+  (put 'negate 'complex 
+      (lambda (z) (make-from-real-imag (- (real-part z)) 
+                                       (- (imag-part z))))) 
   (put 'equ? '(complex complex)
 	   (lambda (x y) (and (= (real-part x) (real-part y)) (= (imag-part x) (imag-part y)))))
   (put '=zero? '(complex) (lambda(x) (and (= (real-part x) 0) (= (imag-part x) 0))))

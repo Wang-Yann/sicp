@@ -1,5 +1,7 @@
+(load "common-agrithm-2.scm")
+
 (define (adjoin-term term term-list)
-	(if (=  (coeff term) 0 ) term-list (cons term term-list)));=zero?
+	(if (=zero? (coeff term)) term-list (cons term term-list)));=zero?
 (define (the-empty-list) '())
 (define (first-term term-list) (car term-list))
 (define (rest-terms term-list) (cdr term-list))
@@ -16,7 +18,7 @@
                                (adjoin-term t1 (add-terms (rest-terms p1) p2)))
                          ((< (order t1) (order t2))
                               (adjoin-term t2 (add-terms p1 (rest-terms p2))))
-                        ((= (order p1) (order p2))
+                        ( else                         ;wrong!!!as (equ? (order p1) (order p2))
                               (adjoin-term (make-term (order t1) (+ (coeff t1) (coeff t2)));add
                                   (add-terms (rest-terms p1) (rest-terms p2)))))))))
 (define (mul-terms L1 L2)
@@ -28,3 +30,30 @@
 		(let (( y (first-term L)))
 			 (adjoin-term (make-term (+ (order x) (order y)) (mul (coeff x) (coeff y)))
 						 (mul-term-by-all-terms x (rest-terms L))))))
+(define (negate-terms term-list)
+             (map (lambda (t) (make-term (order t) (- (coeff t))))   term-list)) ;2-88++++
+
+
+(define (sub-terms L1 L2)
+	(if (empty-termlist? L2) L1 
+		(add-terms L1 (negate-terms L2))))  ;2-91++++++++++++++++++++++++++++++++++
+(define  (the-empty-termlist) '())
+
+(define (div-terms L1 L2)                       ;2-91++++++++++++++++++++++++++++++++++
+   (if (empty-termlist? L1) 
+       (list (the-empty-termlist) (the-empty-termlist)) 
+       (let ((t1 (first-term L1)) 
+             (t2 (first-term L2))) 
+         (if (> (order t2) (order t1)) 
+             (list (the-empty-termlist) L1) 
+             (let ((new-c (div (coeff t1) (coeff t2))) 
+                   (new-o (- (order t1) (order t2)))) 
+                 (let ((rest-of-result                       
+                        (div-terms (sub-terms L1 
+                                              (mul-terms L2 
+                                                         (list (make-term new-o new-c)))) 
+                                   L2))) 
+                   (list (adjoin-term (make-term new-o new-c) 
+                                      (car rest-of-result)) 
+                         (cadr rest-of-result)))))))) 
+

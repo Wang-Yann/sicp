@@ -1,5 +1,5 @@
 (load "put+get.scm")
-(load "attach-tag.scm")
+(load "attach-tag-2.scm")
 
 (define (install-rational-package)
   ;; internal procedures
@@ -36,6 +36,8 @@
        (lambda (n d) (tag (make-rat n d))))
   (put 'equ? '(rational rational)
 	   (lambda (x y) (and (= (numer x) (numer y)) (= (denom x) (denom y)))))
+  (put 'negate '(rational)
+      (lambda (rat) (make-rational (- (numer rat)) (denom rat))))
   (put '=zero? '(rational) (lambda(x) (and (= (numer x) 0)  (not (= (denom x) 0)))))
   (put 'raise '(rational) 
            (lambda (x) (make-complex-from-real-imag x 0)))
