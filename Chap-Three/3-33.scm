@@ -1,0 +1,18 @@
+(load "interface-connector.scm")
+(load "probe-connector.scm")
+(load "constraint.scm")
+(load "make-connector.scm")
+(define (average a b c)               ;;;;;;错误把a b c 放进let里面创建了临时变量
+	(let((d (make-connector))(u (make-connector)))
+		(adder a b u)
+		(multiplier c d u)
+		(constant 2 d)
+	'ok))
+(define a (make-connector))
+(define b (make-connector))
+(define c (make-connector))
+(probe " A temp " a)
+(probe " B temp  " b)
+(probe "C temp " c)
+
+(average a b c)
