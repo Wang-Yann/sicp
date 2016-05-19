@@ -1,4 +1,5 @@
 ;;;p212
+(load "make-serializer.scm")
 (define (make-account balance)
 	(define (withdraw amount)
 		(if (>= balance amount) 
@@ -9,3 +10,7 @@
 	(let((protected (make-serializer)))
 		(define (dispatch m)
 			(cond( (eq? m 'withdraw ) (protected withdraw)) 
+				 ((eq? m 'deposit) (protected deposit))
+				 ((eq? m 'balance) balance)
+				 ((else (error "Unknown--request----MAKE_ACCOUNT" m)))))
+dispatch))
