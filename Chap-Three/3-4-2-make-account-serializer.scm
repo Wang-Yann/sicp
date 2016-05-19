@@ -1,0 +1,11 @@
+;;;p212
+(define (make-account balance)
+	(define (withdraw amount)
+		(if (>= balance amount) 
+			(begin (set! balance (- balance amount)) balance)
+			"Insufficient funds"))
+	(define (deposit amount)
+		(set! balance (+ balance amount)) balance)
+	(let((protected (make-serializer)))
+		(define (dispatch m)
+			(cond( (eq? m 'withdraw ) (protected withdraw)) 
