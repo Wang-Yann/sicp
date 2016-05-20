@@ -1,4 +1,5 @@
-(load "parallel-execute.scm")
+(load "serialized-parallel-execute.scm")
+(load "make-serializer.scm")
 (define x 10)
 (define s (make-serializer))
 (parallel-execute (lambda () (set! x ((s (lambda() (* x x))))))
