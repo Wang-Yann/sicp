@@ -20,9 +20,9 @@
 (define (stream-ref s n)
 	(if (= n 0) (stream-car s)
 		 (stream-ref (stream-cdr s) (- n 1))));;;;此处ctrl n 笔误stream-car,导致运行不成功
-(define (stream-map proc s)
-	(if (stream-null? s) the-empty-stream
-		(cons-stream (proc (stream-car s)) (stream-map proc (stream-cdr s)))))
+;(define (stream-map proc s)
+;	(if (stream-null? s) the-empty-stream
+;		(cons-stream (proc (stream-car s)) (stream-map proc (stream-cdr s)))))
 (define (stream-for-each proc s)
 	(if (stream-null? s) 'done
 		 (begin (proc (stream-car s)) (stream-for-each proc (stream-cdr s)))))
@@ -40,3 +40,13 @@
               (cons-stream (stream-car stream)(stream-filter pred (stream-cdr stream))))
            (else (stream-filter pred (stream-cdr stream)))))
 
+(define (stream-map proc . argstreams)
+	(if (stream-null?  (car argstreams))
+			the-empty-stream
+		(cons-stream
+			(apply proc (map stream-car   argstreams))
+			(apply stream-map (cons proc (map    stream-cdr     argstreams))))))
+(define (add-streams a1 a2) (stream-map + a1 a2));;;为实现add-streams,采用了练习3-50的扩展版stream-map
+
+(define (scale-stream stream factor)
+	(stream-map (lambda (x) (* x factor)) stream))

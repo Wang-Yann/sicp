@@ -17,7 +17,7 @@
 	(cond ((stream-null? stream) the-empty-stream)
 		  ((>= a b) the-empty-stream)
 		  (else (cons-stream (stream-ref stream a) (stream-section stream (+ a 1) b)))))
-;;;(display-stream (stream-section no-sevens 100 109))运行成功可是sieve却不能使用stream-section
+;;;(display-stream (stream-section no-sevens 100 109))
 (define (not-div? x y) (not (= (remainder x y)  0)));;;sieve运行也不成功，于是又把过滤函数修改一下，不过 也是stream-ref 3000就耗尽内存,只能到2000+
 ;;;;以上为使用delay force内置版本；后又在make-stream-version2修改delay，使用记忆版和普通版delay 均运行至1000+，未及内置版本delay
 ;;;本机采用Ubuntu 虚拟机，内存2G，解释器为mit-scheme
@@ -27,3 +27,26 @@
 														(stream-cdr stream)))))
 (define primes (sieve (integers-starting-from 2)))
 ;;(display-stream (stream-section primes 100 109))
+
+(define ones (cons-stream 1 ones))
+(define integers2 (cons-stream 1 (add-streams ones integers2)))
+;(display-stream (stream-section integers2 1000 1010))
+
+
+(define fibs2 (cons-stream 0 (cons-stream 1 (add-streams (stream-cdr fibs2) fibs2))))
+;(display-stream (stream-section fibs2 1000 1010))
+
+(define double (cons-stream 1 (scale-stream double 2)))
+
+(LOAD "../Chap-one/prime.scm")
+(define primes2 (cons-stream 2 (stream-filter prime? (integers-starting-from 3))))
+;	(define (prime? n)
+;		(define (iter ps)
+;			(cond ((> (square (stream-car ps)) n) true)
+;			  ((divisible? n (stream-car ps)) false)
+;			  (else (iter (stream-cdr ps)))))
+;	(iter primes2))
+;;;;;;书本229页的prime?原理上可以工作，但是并未试验成功，所以采用了第一章的prime?函数，运行成功，但是与教材笨处目的不一致，先搁置此处，学习后面内容。
+;(display-stream (stream-section primes2 100 109))
+
+

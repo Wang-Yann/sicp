@@ -1,0 +1,6 @@
+(define (expand num den radix)
+	(cons-stream (quotient (* num radix) den) 
+				(expand (remainder (* num radix) den) den radix)))
+(define a (expand 1 7 10))
+(define b (expand 3 8 10))
+;(display-stream (stream-section a 0 10))

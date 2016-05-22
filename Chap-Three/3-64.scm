@@ -1,0 +1,6 @@
+(load "3-5-3.scm")
+(define (stream-limit s delta)
+	(if (<  (abs (- (stream-car s)(stream-car (stream-cdr s)))) delta)
+		(stream-car (stream-cdr s))
+		(stream-limit (stream-cdr s) delta)))
+(define (sqrt x tolerance) (stream-limit (sqrt-stream x) tolerance))
