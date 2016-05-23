@@ -1,0 +1,6 @@
+(define (solve-2nd a b dt  y0 dy0 ddy)
+	(define y (integral (delay dy) y0 dt))
+	(define dy (integral (delay ddy) dy0 dt))
+	(define ddy (add-streams (scale-stream  dy a) (scale-stream y b)))
+	y)
+;;(stream-ref (solve-2nd 1 2 0.01 10.2 19.34 (lambda (t) (+ t (log t)))) 100)

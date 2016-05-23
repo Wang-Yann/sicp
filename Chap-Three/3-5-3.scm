@@ -37,6 +37,15 @@
 		 (cons-stream (stream-car s1) (interleave s2 (stream-cdr s1)))))
 ;;;;(display-stream (stream-section (pairs integers integers) 0 10))
 
+;;;p239 signal stream
+(define (integral integerand initial-value dt)
+	(define int
+		(cons-stream initial-value 
+			(add-streams (scale-stream integerand dt) int)))
+	int)
+(load "3-59.scm")  ;;;;sine-series 
+;;(display-stream (stream-section (intgeral sine-series 100 0.001 ) 5 15))
+
 
 
 

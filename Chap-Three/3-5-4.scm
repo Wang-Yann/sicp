@@ -1,0 +1,15 @@
+(load "3-5-3.scm")
+(define (integral delayed-intergrand initial-value dt)
+	(define int 
+		(cons-stream initial-value 
+			(let((integrand (force delayed-intergrand)))
+					(add-streams (scale-stream integrand dt) 
+								 int))))
+	int)
+(define (solve f y0 dt)
+	(define y (integral (delay dy) y0 dt))
+	(define dy (stream-map f y))
+	y)
+(define (f x) (+ (sin x) (log  x) x -120 ))
+;;; (display-stream (stream-section (solve f 1 0.001) 10 15))
+;;(stream-ref (solve (lambda(y) y) 1 0.001) 1000)
